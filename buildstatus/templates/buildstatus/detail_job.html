@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<table id="packages_table1" table class = "table table-striped table-bordered" >
+        <thead>
+                <tr>
+                  <th>Build</th>
+                  <th>date</th>
+                  <th>Status</th>
+                  <th>Sanity</th>
+                  <th>Smoke</th>
+                  <th>System</th>
+                  <th>Releasecandidate</th>
+                  <th>JIRA_open</th>
+                  <th>JIRA_closed</th>
+                </tr>
+        </thead>
+         
+    {% for results in results %}
+       <tbody>
+        <tr> 
+            <td>{{ results.build }}</td>
+            <td>{{ results.date }}</td>
+            <td>{{ results.Status }}</td>
+            <td>{{ results.Sanity }}</td>
+            <td>{{ results.Smoke }}</td>
+            <td>{{ results.System }}</td>
+            <td>{{ results.Releasecandidate }}</td>
+            <td>{{ results.JIRA_open }}</td> 
+            <td>{{ results.JIRA_closed }}</td>       
+            <td><a class="btn btn-warning btn-sm js-update-book" href="{% url 'jenkinsjobsinformation_edit' pk=results.id %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        </tr>
+        </tbody>
+    {% endfor %}    
+</table>
+<div class="pagination">
+    <span class="step-links">
+        {% if results.has_previous %}
+            <a href="?page={{ results.previous_page_number }}">PREV</a>
+        {% endif %}
+
+        <!--<span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}.
+        </span>-->
+
+        {% if results.has_next %}
+            <a href="?page={{ results.next_page_number }}">NEXT</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+
+
